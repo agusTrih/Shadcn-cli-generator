@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Home() {
 	return (
 		<div className='bg-blue-50 min-h-screen py-10'>
-			<div className='max-w-5xl mx-auto'>
+			<div className='max-w-xl  md:max-w-4xl lg:max-w-5xl mx-auto'>
 				<div className='max-w-3xl mx-auto mb-8'>
 					<h1 className='text-6xl font-black text-center '>
 						Shadcn CLI Generator
@@ -25,7 +25,7 @@ export default function Home() {
 					</div> */}
 				</div>
 				{/* section form */}
-				<div className='  bg-white p-8 rounded-2xl shadow-lg'>
+				<div className='  bg-white p-4 md:p-8 mx-1 rounded-2xl shadow-lg'>
 					<h2 className='mb-4 text-4xl font-bold'> Pick your Components</h2>
 					<FormGenerateCode />
 				</div>
