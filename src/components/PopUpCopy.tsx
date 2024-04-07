@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
+import { getLocalStorage, setLocalStorage } from "@/lib/utils";
+import { DataStored } from "@/types";
 
 interface PopUpCopyProps {
 	items: string[];
@@ -35,7 +37,34 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 	const { copyToClipboard, status } = useCopyToClipboard();
 
 	const codeCLI = `npx shadcn-ui@latest add ${items?.join(" ")}`;
-	console.log(isOpen, " cek isOpen");
+
+	const handleAddFavorite = (): void => {
+		const KEY_NAME = "favorite";
+		const data: DataStored = { name, cli: codeCLI };
+
+		let favoriteItems: DataStored[] =
+			getLocalStorage<DataStored[]>(KEY_NAME) || [];
+
+		const existingNameIndex = favoriteItems.findIndex(
+			(item) => item.name === data.name
+		);
+		const existingCLIIndex = favoriteItems.findIndex(
+			(item) => item.cli === data.cli
+		);
+
+		if (existingNameIndex !== -1) {
+			console.log("Nama yang sama sudah ada di favorit.");
+			return;
+		}
+
+		if (existingCLIIndex !== -1) {
+			console.log("CLI yang sama sudah ada di favorit.");
+			return;
+		}
+
+		favoriteItems.push(data);
+		setLocalStorage(KEY_NAME, favoriteItems);
+	};
 
 	return (
 		<Dialog open={isOpen}>
@@ -45,7 +74,9 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-md'>
 				<DialogHeader>
-					<DialogTitle>CLI Ready</DialogTitle>
+					<DialogTitle>
+						CLI: <span className='underline'>{name}</span>
+					</DialogTitle>
 					<DialogDescription>
 						Run the following command in your terminal:
 					</DialogDescription>
@@ -90,6 +121,7 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 						type='button'
 						className='flex gap-x-1  mb-2 md:mb-0'
 						size='sm'
+						onClick={handleAddFavorite}
 					>
 						<Bookmark className=' text-primary-foreground h-4 w-4' /> Add to
 						Favorite

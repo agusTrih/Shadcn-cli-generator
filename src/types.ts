@@ -14,5 +14,5 @@ type Group = {
 
 type ComponentsList = Group[];
 
-
-export type { Component, Group, ComponentsList };
+type DataStored = { name: string, cli: string; };
+export type { Component, Group, ComponentsList, DataStored };
