@@ -1,4 +1,4 @@
-import FormGenerateCode from "@/components/ui/FormGenerateCode";
+import FormGenerateCode from "@/components/FormGenerateCode";
 import Image from "next/image";
 
 export default function Home() {
