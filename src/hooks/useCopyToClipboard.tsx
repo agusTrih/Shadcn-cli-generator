@@ -10,22 +10,25 @@ interface CopyToClipboardHook {
 function useCopyToClipboard(): CopyToClipboardHook {
 	const [status, setStatus] = useState<CopyToClipboardStatus>("idle");
 
-	const copyToClipboard = (text: string): void => {
+	const copyToClipboard = async (text: string): Promise<void> => {
 		setStatus("idle");
 
-		if (typeof navigator !== "undefined" && navigator.clipboard) {
-			navigator.clipboard
-				.writeText(text)
-				.then(() => {
-					setStatus("success");
-				})
-				.catch((error) => {
-					setStatus("error");
-					console.error("Failed to copy text to clipboard:", error);
-				});
-		} else {
+		try {
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				await navigator.clipboard.writeText(text);
+				setStatus("success");
+			} else {
+				throw new Error("Clipboard API is not available");
+			}
+		} catch (error) {
 			setStatus("error");
-			console.error("Clipboard API is not supported");
+			console.error("Failed to copy text to clipboard:", error);
+		} finally {
+			const TIMEOUT_DELAY_MS = 5000;
+			// Setelah 5 detik, kembalikan status ke 'idle'
+			setTimeout(() => {
+				setStatus("idle");
+			}, TIMEOUT_DELAY_MS);
 		}
 	};
 

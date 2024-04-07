@@ -24,17 +24,17 @@ interface PopUpCopyProps {
 const PopUpCopy: FC<PopUpCopyProps> = ({ items, title }) => {
 	const { copyToClipboard, status } = useCopyToClipboard();
 
-	const codeCLI = "npx shadcn-ui@latest add brown";
+	const codeCLI = `npx shadcn-ui@latest add ${items?.join(" ")}`;
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant='outline'>{title}</Button>
+				<Button>{title}</Button>
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-md'>
 				<DialogHeader>
-					<DialogTitle>Share link</DialogTitle>
+					<DialogTitle>CLI Ready</DialogTitle>
 					<DialogDescription>
-						Anyone who has this link will be able to view this.
+						Run the following command in your terminal:
 					</DialogDescription>
 				</DialogHeader>
 				<div className='flex items-center space-x-2'>
@@ -57,16 +57,16 @@ const PopUpCopy: FC<PopUpCopyProps> = ({ items, title }) => {
 						}}
 					>
 						{status === "success" && (
-							<div className='flex gap-x-1 items-center'>
-								<CheckCircle size={16} />
+							<div className='flex gap-x-1 items-center justify-center'>
+								<CheckCircle size={14} />
 								success
 							</div>
 						)}
 						{status === "error" && <p>Gagal menyalin teks ke clipboard.</p>}
 						{status === "idle" && (
-							<div className='flex gap-x-1'>
+							<div className='flex gap-x-1 items-center'>
 								<span className='sr-only'>Copy</span>
-								<Copy className='h-4 w-4' /> Copy to Clipboard
+								<Copy size={14} /> Copy to Clipboard
 							</div>
 						)}
 					</Button>

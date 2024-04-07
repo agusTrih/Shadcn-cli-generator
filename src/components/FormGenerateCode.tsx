@@ -37,90 +37,100 @@ export default function FormGenerateCode() {
 	}
 
 	return (
-		<>
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-					<FormField
-						control={form.control}
-						name='items'
-						render={() => (
-							<FormItem>
-								<div className='mb-4'>
-									<FormLabel className='text-base'>Sidebar</FormLabel>
-									<FormDescription>
-										Select the items you want to display in the sidebar.
-									</FormDescription>
-								</div>
-								<div className='grid grid-cols-2  md:gap-x-4 lg:gap-x-8  gap-y-6'>
-									{componentsList?.map((group) => {
-										return (
-											<div key={group?.id}>
-												<h3 className='font-bold text-xl mb-2'>
-													{group?.title}
-												</h3>
-												<div>
-													{group?.components?.map((component) => {
-														return (
-															<FormField
-																key={component?.id}
-																control={form.control}
-																name='items'
-																render={({ field }) => {
-																	return (
-																		<FormItem
-																			key={component?.id}
-																			className='flex flex-row items-start space-x-3 space-y-0 mb-2'
-																		>
-																			<FormControl>
-																				<Checkbox
-																					checked={field.value?.includes(
-																						component?.slug
-																					)}
-																					onCheckedChange={(checked) => {
-																						return checked
-																							? field.onChange([
-																									...field.value,
-																									component?.slug,
-																							  ])
-																							: field.onChange(
-																									field.value?.filter(
-																										(value) =>
-																											value !== component.slug
-																									)
-																							  );
-																					}}
-																				/>
-																			</FormControl>
-																			<FormLabel className='font-normal'>
-																				{component?.title}
-																			</FormLabel>
-																		</FormItem>
-																	);
-																}}
-															/>
-														);
-													})}
-												</div>
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+				<FormField
+					control={form.control}
+					name='items'
+					render={() => (
+						<FormItem>
+							<div className='mb-4'>
+								<FormLabel className='text-base'>
+									<a
+										href='https://ui.shadcn.com/docs/components'
+										target='_blank'
+										rel='noopener noreferrer'
+										className='underline'
+									>
+										Shadcn Components
+									</a>{" "}
+								</FormLabel>
+								<FormDescription>
+									Select the components you want to add to your project
+								</FormDescription>
+							</div>
+							<div className='grid grid-cols-2  md:gap-x-4 lg:gap-x-8  gap-y-6'>
+								{componentsList?.map((group) => {
+									return (
+										<div key={group?.id}>
+											<h3 className='font-bold text-xl mb-2'>{group?.title}</h3>
+											<div>
+												{group?.components?.map((component) => {
+													return (
+														<FormField
+															key={component?.id}
+															control={form.control}
+															name='items'
+															render={({ field }) => {
+																return (
+																	<FormItem
+																		key={component?.id}
+																		className='flex flex-row items-start space-x-3 space-y-0 mb-2'
+																	>
+																		<FormControl>
+																			<Checkbox
+																				checked={field.value?.includes(
+																					component?.slug
+																				)}
+																				onCheckedChange={(checked) => {
+																					return checked
+																						? field.onChange([
+																								...field.value,
+																								component?.slug,
+																						  ])
+																						: field.onChange(
+																								field.value?.filter(
+																									(value) =>
+																										value !== component.slug
+																								)
+																						  );
+																				}}
+																			/>
+																		</FormControl>
+																		<FormLabel className='font-normal text-neutral-600'>
+																			{component?.title}{" "}
+																			{component?.isNew && (
+																				<span className='bg-green-100 text-green-600 py-0 px-1 rounded-2xl text-xs font-medium'>
+																					new
+																				</span>
+																			)}
+																		</FormLabel>
+																	</FormItem>
+																);
+															}}
+														/>
+													);
+												})}
 											</div>
-										);
-									})}
-								</div>
+										</div>
+									);
+								})}
+							</div>
 
-								<FormMessage />
-							</FormItem>
-						)}
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<div className='w-full flex justify-center'>
+					<PopUpCopy
+						title='Generate CLI Components'
+						items={form.watch("items")}
 					/>
-					<div className='w-full flex justify-center'>
-						<PopUpCopy
-							title='Generate CLI Components'
-							items={form.watch("items")}
-						/>
-						{/* <Button type='submit' className=' w-fit'>
+					{/* <Button type='submit' className=' w-fit'>
 							Add to Favorite
 						</Button> */}
-					</div>
-				</form>
-			</Form>
-		</>
+				</div>
+			</form>
+		</Form>
 	);
 }

@@ -13,6 +13,13 @@ const componentsList: ComponentsList = [
         isNew: false
       },
       {
+        id: 99,
+        slug: "breadcrumb",
+        title: "Breadcrumb",
+        url: "/components/menubar",
+        isNew: true
+      },
+      {
         id: 2,
         slug: "navigation-menu",
         title: "Navigation Menu",
@@ -72,7 +79,7 @@ const componentsList: ComponentsList = [
         slug: "alert-dialog",
         title: "Alert Dialog",
         url: "/components/alert-dialog",
-        isNew: true
+        isNew: false
       },
       {
         id: 10,
@@ -114,7 +121,7 @@ const componentsList: ComponentsList = [
         slug: "badge",
         title: "Badge",
         url: "/components/badge",
-        isNew: true
+        isNew: false
       },
       {
         id: 15,
@@ -155,6 +162,13 @@ const componentsList: ComponentsList = [
         slug: "combobox",
         title: "Combobox",
         url: "/components/combobox",
+        isNew: false
+      },
+      {
+        id: 99,
+        slug: "input-otp",
+        title: "Input OTP",
+        url: "/components/otp",
         isNew: true
       },
       {
@@ -230,7 +244,7 @@ const componentsList: ComponentsList = [
         slug: "command",
         title: "Command",
         url: "/components/command",
-        isNew: true
+        isNew: false
       },
       {
         id: 29,
