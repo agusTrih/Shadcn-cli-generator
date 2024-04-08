@@ -4,7 +4,7 @@ interface InfoPreviewProps {}
 
 const InfoPreview: FC<InfoPreviewProps> = ({}) => {
 	return (
-		<div className='prose w-full'>
+		<div className='prose w-full px-4'>
 			<h4>Hello, thanks to visit Shadcn CLI generator</h4>
 			<p>
 				I hope you like this, and also, you can tell me some great ideas you

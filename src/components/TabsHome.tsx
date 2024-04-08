@@ -12,15 +12,16 @@ const TabsHome: FC<TabsHomeProps> = ({}) => {
 		<Tabs defaultValue='cli' className='w-full'>
 			<TabsList>
 				<TabsTrigger value='cli'>
-					<Terminal size={16} className='mr-1' /> Generate CLI
+					<Terminal size={16} className='mr-1' />{" "}
+					<span className='hidden sm:block'>Generate CLI</span>
 				</TabsTrigger>
 				<TabsTrigger value='love'>
 					<FolderHeartIcon size={16} className='mr-1' />
-					My Favorite CLI
+					<span className='hidden sm:block'>My Favorite CLI</span>
 				</TabsTrigger>
 				<TabsTrigger value='info'>
 					<InfoIcon size={16} className='mr-1' />
-					Info
+					<span className='hidden sm:block'>Info</span>
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent value='cli'>
