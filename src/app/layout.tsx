@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
 	title: "Shadcn CLI Generator",
 	description: "Add and Save Your Favorite Shadcn UI Components!",
+	creator: "Agus Trihanton",
+	icons: "/icon.png",
+	keywords: ["shadcn", " shadcn ui", "shadcn cli generator", "shadcn cli"],
 };
 
 export default function RootLayout({
