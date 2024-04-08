@@ -4,7 +4,7 @@ export default function Home() {
 	return (
 		<div className='bg-blue-50 min-h-screen py-10'>
 			<div className='max-w-xl  md:max-w-4xl lg:max-w-5xl mx-auto'>
-				<div className='max-w-3xl mx-auto mb-8'>
+				<header className='max-w-3xl mx-auto mb-8'>
 					<h1 className='text-6xl font-black text-center '>
 						Shadcn CLI Generator
 					</h1>
@@ -23,8 +23,18 @@ export default function Home() {
 							Component CLI Hub!
 						</p>
 					</div> */}
-				</div>{" "}
-				<TabsHome />
+				</header>{" "}
+				<main>
+					<TabsHome />
+				</main>
+				<footer className='mt-10 flex flex-col justify-center items-center'>
+					<div>
+						created by{" "}
+						<a className='underline' href='https://gstrhntn.netlify.app'>
+							agus trihanton
+						</a>
+					</div>
+				</footer>
 				{/* section form */}
 			</div>
 		</div>

@@ -3,7 +3,8 @@ import FavoriteCli from "@/components/FavoriteCli";
 import FormGenerateCode from "@/components/FormGenerateCode";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FolderHeartIcon, Terminal } from "lucide-react";
+import { FolderHeartIcon, Info, InfoIcon, Terminal } from "lucide-react";
+import InfoPreview from "./InfoPreview";
 interface TabsHomeProps {}
 
 const TabsHome: FC<TabsHomeProps> = ({}) => {
@@ -11,11 +12,15 @@ const TabsHome: FC<TabsHomeProps> = ({}) => {
 		<Tabs defaultValue='cli' className='w-full'>
 			<TabsList>
 				<TabsTrigger value='cli'>
-					<Terminal className='mr-1' /> Generate CLI
+					<Terminal size={16} className='mr-1' /> Generate CLI
 				</TabsTrigger>
 				<TabsTrigger value='love'>
-					<FolderHeartIcon className='mr-1' />
+					<FolderHeartIcon size={16} className='mr-1' />
 					My Favorite CLI
+				</TabsTrigger>
+				<TabsTrigger value='info'>
+					<InfoIcon size={16} className='mr-1' />
+					Info
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent value='cli'>
@@ -26,6 +31,9 @@ const TabsHome: FC<TabsHomeProps> = ({}) => {
 			</TabsContent>
 			<TabsContent value='love'>
 				<FavoriteCli />
+			</TabsContent>
+			<TabsContent value='info'>
+				<InfoPreview />
 			</TabsContent>
 		</Tabs>
 	);
