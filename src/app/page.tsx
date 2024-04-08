@@ -1,5 +1,4 @@
-import FormGenerateCode from "@/components/FormGenerateCode";
-import Image from "next/image";
+import TabsHome from "@/components/TabsHome";
 
 export default function Home() {
 	return (
@@ -12,6 +11,7 @@ export default function Home() {
 					<p className='text-base font-black text-center mb-4 text-neutral-700'>
 						Add and Save Your Favorite Shadcn UI Components!
 					</p>
+
 					{/* <div className='prose max-w-full  prose-p:text-neutral-400 text-sm'>
 						<p>
 							Shadcn Component CLI Hub is your go-to platform for discovering,
@@ -23,12 +23,9 @@ export default function Home() {
 							Component CLI Hub!
 						</p>
 					</div> */}
-				</div>
+				</div>{" "}
+				<TabsHome />
 				{/* section form */}
-				<div className='  bg-white p-4 md:p-8 mx-1 rounded-2xl shadow-lg'>
-					<h2 className='mb-4 text-4xl font-bold'> Pick your Components</h2>
-					<FormGenerateCode />
-				</div>
 			</div>
 		</div>
 	);

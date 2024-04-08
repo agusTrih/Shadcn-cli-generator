@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Bookmark, Check, CheckCircle, Copy, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,8 @@ import { Label } from "@/components/ui/label";
 import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 import { getLocalStorage, setLocalStorage } from "@/lib/utils";
 import { DataStored } from "@/types";
+import { toast } from "sonner";
+import { KEY_NAME } from "@/constant";
 
 interface PopUpCopyProps {
 	items: string[];
@@ -39,7 +41,6 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 	const codeCLI = `npx shadcn-ui@latest add ${items?.join(" ")}`;
 
 	const handleAddFavorite = (): void => {
-		const KEY_NAME = "favorite";
 		const data: DataStored = { name, cli: codeCLI };
 
 		let favoriteItems: DataStored[] =
@@ -53,17 +54,24 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 		);
 
 		if (existingNameIndex !== -1) {
-			console.log("Nama yang sama sudah ada di favorit.");
+			toast.warning("Nama yang sama sudah ada di favorit.");
 			return;
 		}
 
 		if (existingCLIIndex !== -1) {
-			console.log("CLI yang sama sudah ada di favorit.");
+			toast.warning("CLI yang sama sudah ada di favorit.");
 			return;
 		}
 
 		favoriteItems.push(data);
-		setLocalStorage(KEY_NAME, favoriteItems);
+		try {
+			setLocalStorage(KEY_NAME, favoriteItems);
+			toast.success("Success add to Favorite");
+		} catch (error) {
+			// Tangani pengecualian saat menyimpan data ke local storage
+			toast.error(`Error while saving data to local storage: ${error}`);
+			return;
+		}
 	};
 
 	return (
@@ -86,12 +94,12 @@ const PopUpCopy: FC<PopUpCopyProps> = ({
 						<Label htmlFor='link' className='sr-only'>
 							Link
 						</Label>
-						<code className='bg-neutral-800 text-neutral-500 p-4 rounded-md relative'>
-							<div>
+						<pre className='bg-neutral-800 text-neutral-500 p-4 rounded-md w-full relative'>
+							<code className='whitespace-break-spaces'>
 								<span className='text-white'>npx</span> shadcn-ui@latest add{" "}
 								{items?.map((item) => `${item} `)}
-							</div>
-						</code>
+							</code>
+						</pre>
 					</div>
 				</div>
 				<DialogFooter className='sm:justify-start'>
